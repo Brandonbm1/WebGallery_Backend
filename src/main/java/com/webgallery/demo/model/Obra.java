@@ -2,7 +2,6 @@ package com.webgallery.demo.model;
 
 
 import javax.persistence.*;
-import com.webgallery.demo.security.models.User;
 
 @Entity
 @Table(name= "obra")
@@ -11,9 +10,9 @@ public class Obra {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
-	private User autor;
+	@ManyToOne()
+	@JoinColumn(name = "autor_id")
+	private Usuario autor;
 	@Column(length = 50)
 	private String nombre; 
 	@Column(length = 250)
@@ -28,11 +27,11 @@ public class Obra {
 	private String fechaCreacion;
 	
 	
-	public User getAutor() {
+	public Usuario getAutor() {
 		return autor;
 	}
 
-	public void setAutor(User autor) {
+	public void setAutor(Usuario autor) {
 		this.autor = autor;
 	}
 

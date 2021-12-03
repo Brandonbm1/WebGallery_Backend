@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.webgallery.demo.model.Obra;
+import com.webgallery.demo.model.Usuario;
 import com.webgallery.demo.repository.ObraRepository;
-import com.webgallery.demo.security.models.User;
 
 
 @Controller
@@ -20,10 +20,6 @@ import com.webgallery.demo.security.models.User;
 public class ObraController {
 	@Autowired
 	private ObraRepository RepositorioObra;
-	/*@Autowired
-	private OrdenRepository RepositorioOrden;
-	@Autowired
-	private UserRepository RepositorioUsuario;*/
 	
 	@GetMapping("/listar")
 	public ResponseEntity<List<Obra>>getObra(){
@@ -48,7 +44,7 @@ public class ObraController {
 		Optional<Obra> datosObras = RepositorioObra.findById(id);
 		if(datosObras.isPresent()) {
 			Obra obr= datosObras.get();
-			User nuevoAutor = o.getAutor();
+			Usuario nuevoAutor = o.getAutor();
 			String nuevoNombre = o.getNombre();
 			String nuevaDescripcion = o.getDescripcion();
 			String nuevoPrecio = o.getPrecio();

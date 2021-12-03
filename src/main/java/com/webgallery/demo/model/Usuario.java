@@ -1,4 +1,4 @@
-package com.webgallery.demo.security.models;
+package com.webgallery.demo.model;
 //tomado de https://www.bezkoder.com/spring-boot-jwt-authentication/
 
 import java.util.ArrayList;
@@ -16,16 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.webgallery.demo.model.Obra;
 @Entity
-@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "email") })
-public class User {
+@Table(name = "users")
+public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -58,6 +57,10 @@ public class User {
 	private String foto;
 	
 	@NotBlank
+	@Size(max = 20)
+	private String username;
+	
+	@NotBlank
 	@Size(max = 50)
 	@Email
 	private String email;
@@ -77,16 +80,19 @@ public class User {
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
-	
-	
 	private Set<Role> roles = new HashSet<>();
+	
+	@JoinColumn(name = "ordenes_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    private Orden orden;
 
-	public User() {
+	public Usuario() {
 	}
 
-	public User(String username, String email, String password) {
+	public Usuario(String username, String email, String password) {
 		this.email = email;
 		this.password = password;
+		this.username = username;
 	}
 
 	public Long getId() {
