@@ -1,90 +1,71 @@
 package com.webgallery.demo.model;
-//tomado de https://www.bezkoder.com/spring-boot-jwt-authentication/
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 @Entity
-@Table(name = "users")
+@Table(name = "usuario")
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 
-	@NotBlank
-	@Size(max = 20)
+	@Size(max = 150)
 	private String nombres;
 
-	@NotBlank
-	@Size(max = 20)
-	private String apellidos;
-
-	@NotBlank
-	@Size(max = 20)
-	private String documento;
-
-	@NotBlank
-	private int edad;
-
-	@NotBlank
-	@Size(max = 13)
-	private String telefono;
-
-	@NotBlank
-	@Size(max = 20)
-	private String direccion;
-
-	@NotBlank
-	@Size(max = 250)
-	private String foto;
-	
-	@NotBlank
 	@Size(max = 20)
 	private String username;
-	
-	@NotBlank
+
 	@Size(max = 50)
 	@Email
 	private String email;
 
-	@NotBlank
 	@Size(max = 120)
 	private String password;
-	
-	@NotBlank
+
+	@Size(max = 20)
+	private String documento;
+
+	private String edad;
+
+	@Size(max = 13)
+	private String telefono;
+
+	@Size(max = 20)
+	private String direccion;
+
+	@Size(max = 250)
+	private String foto;
+
 	@Size(max = 250)
 	private String descripcion;
 	
-	@OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
-	private List<Obra> obras = new ArrayList<>();
-
+/*	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(	name = "user_roles", 
-				joinColumns = @JoinColumn(name = "user_id"), 
+	@JoinTable( name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@JoinColumn(name = "ordenes_id")
-    @OneToOne(fetch = FetchType.LAZY)
-    private Orden orden;
+	*/
+
+	@OneToOne(mappedBy = "comprador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Carrito carrito;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
+	private List<Obra> obras;
+
+	public Carrito getCarrito() {
+		return carrito;
+	}
+
+	public void setCarrito(Carrito carrito) {
+		this.carrito = carrito;
+	}
 
 	public Usuario() {
 	}
@@ -95,14 +76,13 @@ public class Usuario {
 		this.username = username;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getEmail() {
 		return email;
@@ -119,12 +99,85 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+/*
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 	public Set<Role> getRoles() {
 		return roles;
 	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+*/
+	public String getNombres() {
+		return nombres;
 	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+
+	public String getEdad() {
+		return edad;
+	}
+
+	public void setEdad(String edad) {
+		this.edad = edad;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+	
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public List<Obra> getObras() {
+		return obras;
+	}
+
+	public void setObras(List<Obra> obras) {
+		this.obras = obras;
+	}
+
+	
 }

@@ -1,18 +1,17 @@
 package com.webgallery.demo.model;
 
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name= "obra")
 public class Obra {
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@ManyToOne()
-	@JoinColumn(name = "autor_id")
-	private Usuario autor;
 	@Column(length = 50)
 	private String nombre; 
 	@Column(length = 250)
@@ -26,6 +25,13 @@ public class Obra {
 	@Column(length = 10)
 	private String fechaCreacion;
 	
+	@ManyToMany(mappedBy = "obras")
+	private List<Carrito> carritos;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "autor_id")
+	private Usuario autor;
 	
 	public Usuario getAutor() {
 		return autor;

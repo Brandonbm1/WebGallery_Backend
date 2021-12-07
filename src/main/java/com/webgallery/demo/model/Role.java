@@ -1,4 +1,4 @@
-package com.webgallery.demo.model;
+/*package com.webgallery.demo.model;
 //tomado de https://www.bezkoder.com/spring-boot-jwt-authentication/
 
 import javax.persistence.Column;
@@ -44,4 +44,4 @@ public class Role {
 	public void setName(ERole name) {
 		this.name = name;
 	}
-}
+}*/
