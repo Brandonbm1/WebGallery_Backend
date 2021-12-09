@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -52,7 +54,7 @@ public class Usuario {
 	private Set<Role> roles = new HashSet<>();
 	
 	*/
-
+	@JsonIgnore
 	@OneToOne(mappedBy = "comprador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Carrito carrito;
 	
@@ -62,7 +64,6 @@ public class Usuario {
 	public Carrito getCarrito() {
 		return carrito;
 	}
-
 	public void setCarrito(Carrito carrito) {
 		this.carrito = carrito;
 	}
