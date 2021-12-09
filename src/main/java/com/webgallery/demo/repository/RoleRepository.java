@@ -1,4 +1,4 @@
-package com.webgallery.demo.security.respository;
+package com.webgallery.demo.repository;
 //tomado de https://www.bezkoder.com/spring-boot-jwt-authentication/
 
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.webgallery.demo.security.models.ERole;
-import com.webgallery.demo.security.models.Role;
+import com.webgallery.demo.model.ERole;
+import com.webgallery.demo.model.Role;
 
 
 

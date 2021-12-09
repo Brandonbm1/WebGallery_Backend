@@ -1,4 +1,4 @@
-/*package com.webgallery.demo.model;
+package com.webgallery.demo.model;
 //tomado de https://www.bezkoder.com/spring-boot-jwt-authentication/
 
 import javax.persistence.Column;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20)
@@ -29,11 +29,11 @@ public class Role {
 		this.name = name;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -44,4 +44,4 @@ public class Role {
 	public void setName(ERole name) {
 		this.name = name;
 	}
-}*/
+}

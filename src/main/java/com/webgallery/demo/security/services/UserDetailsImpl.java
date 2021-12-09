@@ -10,7 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.webgallery.demo.security.models.User;
+import com.webgallery.demo.model.Usuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.webgallery.demo.security.services.UserDetailsImpl;
@@ -18,7 +18,7 @@ import com.webgallery.demo.security.services.UserDetailsImpl;
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private int id;
 
 	private String username;
 
@@ -29,16 +29,16 @@ public class UserDetailsImpl implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Long id, String username, String email, String password,
+	public UserDetailsImpl(int i, String username, String email, String password,
 			Collection<? extends GrantedAuthority> authorities) {
-		this.id = id;
+		this.id = i;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
 	}
 
-	public static UserDetailsImpl build(User user) {
+	public static UserDetailsImpl build(Usuario user) {
 		List<GrantedAuthority> authorities = user.getRoles()
 				
 				
@@ -61,7 +61,7 @@ public class UserDetailsImpl implements UserDetails {
 		return authorities;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 

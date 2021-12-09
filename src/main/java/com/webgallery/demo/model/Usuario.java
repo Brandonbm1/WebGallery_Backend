@@ -27,6 +27,7 @@ public class Usuario {
 	@Email
 	private String email;
 
+	@JsonIgnore
 	@Size(max = 120)
 	private String password;
 
@@ -46,24 +47,22 @@ public class Usuario {
 
 	@Size(max = 250)
 	private String descripcion;
-	
-/*	
+
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable( name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), 
-				inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
-	
-	*/
+
 	@JsonIgnore
 	@OneToOne(mappedBy = "comprador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Carrito carrito;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
 	private List<Obra> obras;
 
 	public Carrito getCarrito() {
 		return carrito;
 	}
+
 	public void setCarrito(Carrito carrito) {
 		this.carrito = carrito;
 	}
@@ -100,7 +99,7 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-/*
+
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
@@ -108,7 +107,7 @@ public class Usuario {
 	public Set<Role> getRoles() {
 		return roles;
 	}
-*/
+
 	public String getNombres() {
 		return nombres;
 	}
@@ -116,6 +115,7 @@ public class Usuario {
 	public void setNombres(String nombres) {
 		this.nombres = nombres;
 	}
+
 	public String getDocumento() {
 		return documento;
 	}
@@ -167,7 +167,7 @@ public class Usuario {
 	public String getDescripcion() {
 		return descripcion;
 	}
-	
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
@@ -180,5 +180,4 @@ public class Usuario {
 		this.obras = obras;
 	}
 
-	
 }
